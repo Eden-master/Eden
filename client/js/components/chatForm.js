@@ -1,6 +1,7 @@
-let React = require('react');
-let ReactDOM = require('react-dom')
-let ChatForm = React.createClass({
+const React = require('react');
+const ReactDOM = require('react-dom');
+
+const ChatForm = React.createClass ({
   post: function(data) {
     return $.ajax({
       type: 'POST',
@@ -29,10 +30,10 @@ let ChatForm = React.createClass({
   render: function() {
     return (
       <div className="chatform">
-      <form id="chat-form" onSubmit={this.handle}>
-        <input type="text" ref="message" className="bar" />
-        <input type="submit" className="hidden" />
-      </form>
+        <form id="chat-form" onSubmit={this.handle}>
+          <input type="text" ref="message" className="bar" />
+          <input type="submit" className="hidden" />
+        </form>
       </div>
     );
   }

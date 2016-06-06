@@ -1,12 +1,12 @@
-let React = require('react');
+const React = require('react');
 
-let MainButton = React.createClass ({
+const MainButton = React.createClass ({
 	render: function() {
-		return(
-		<div className="button">
-			<button onClick={this.props.buttonton}>Main</button>
-		</div>
-		)
+		return (
+  		<div className="button">
+  			<button onClick={this.props.buttonton}>Main</button>
+  		</div>
+    );
 	}
 });
 

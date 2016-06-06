@@ -1,13 +1,11 @@
-'use strict';
-
-let React = require('react');
-let Message = require('./message');
-let ChatForm = require('./chatForm');
-let Banner = require('./banner')
-let MainButton = require('./mainbutton')
+const React = require('react');
+const Message = require('./message');
+const ChatForm = require('./chatForm');
+const Banner = require('./banner')
+const MainButton = require('./mainbutton')
 
 
-let Display = React.createClass({
+const Display = React.createClass ({
   getInitialState: function() {
     return {
       messages: [],
@@ -58,6 +56,7 @@ let Display = React.createClass({
     let messageNodes = this.state.messages.map((message, index)=>{
       return <Message data={message} key={index} onClicky = {this.clickHandler} index={index} />
     });
+    
     return (
       <ul className="chatList">
         <MainButton buttonton={this.buttonHandler}/>

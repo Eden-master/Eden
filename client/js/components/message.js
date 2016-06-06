@@ -1,9 +1,10 @@
-let React = require('react');
+const React = require('react');
 
-let Message = React.createClass ({
+const Message = React.createClass ({
 	messageHandler: function() {
 	   this.props.onClicky(this.props.index)
 	},
+  
 	render: function() {
 		let msg = this.props.data;
 
