@@ -1,0 +1,57 @@
+h1 {
+	color:white;
+}
+
+
+.container{
+	margin: auto;
+    width: 60%;
+    height: 70%;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 25px;
+    background: rgba(25, 25, 25, .5);
+}
+
+
+button{
+	border-radius: 5px;
+	background-color:white;
+	color:green;
+	opacity: 0.8;
+}
+
+input{
+	opacity: 0.8;
+}
+
+.msg{
+	text-align: center;
+}
+
+.banner{
+	text-align: center;
+	list-style-type: none;
+}
+
+.chatform{
+	/*margin-top:60%;*/
+}
+
+.hidden{
+	width:10%;
+}
+
+.bar{
+	width:85%;
+	padding-right:20px;
+}
+
+body {
+	background: url(pic.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	color:white;
+}
