@@ -1,6 +1,7 @@
 'use strict';
 
-const user = require('./../../../config.js')
+const user = require('./../../../config.js');
+
 /* The following sequelize object is the persistent connection to the
  * database. When you require it in other files and store it to a variable
  * (we used 'db'), you can call sequelize functions on it (create, find, etc)
