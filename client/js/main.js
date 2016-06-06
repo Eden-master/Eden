@@ -1,14 +1,12 @@
-'use strict';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Display = require('./components/chatController.js');
 
-let React = require('react');
-let ReactDOM = require('react-dom');
-let Display = require('./components/chatController.js')
+//let ChatWindow = require('./components/chat');
+//let CalendarWindow = require('./components/calendar');
 
-//var ChatWindow = require('./components/chat');
-//var CalendarWindow = require('./components/calendar');
-
-let App = React.createClass({
-  render: function() {
+const App = React.createClass ({
+  render: () => {
     return (
       <div className="container">
       	<Display pollInterval={3000} url="http://localhost:3000/"/>
@@ -16,6 +14,5 @@ let App = React.createClass({
     );
   }
 });
-
 
 ReactDOM.render(<App />, document.getElementById('content'));
