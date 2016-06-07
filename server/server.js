@@ -9,6 +9,7 @@ const messageController = require('./messages/messageController');
 const branchController = require('./branches/branchController')
 
 app.use(express.static(path.join(__dirname + '/../client')));
+app.use(express.static(path.join(__dirname + '/../node_modules')));
 app.use(bodyParser.json());
 
 app.get('/messages', messageController.getMessages);

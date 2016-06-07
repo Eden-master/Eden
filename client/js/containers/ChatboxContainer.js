@@ -3,6 +3,8 @@ import request from 'browser-request';
 import Chatbox from '../components/Chatbox';
 import SubmitMsg from '../components/SubmitMsg';
 
+// const socket = io.connect('http://localhost:3000');
+
 class ChatboxContainer extends React.Component {
   constructor() {
     super();
@@ -16,6 +18,7 @@ class ChatboxContainer extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.updateText = this.updateText.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleBack = this.handleBack.bind(this);
   }
 
   componentDidMount() {
@@ -24,9 +27,9 @@ class ChatboxContainer extends React.Component {
 
   getData() {
     request(this.props.url + '/messages?branch_id=' + this.state.branchID, (err, res, body) => {
-        this.setState({
-          messages: JSON.parse(body)
-        });
+      this.setState({
+        messages: JSON.parse(body)
+      });
     });
   }
 
@@ -56,7 +59,7 @@ class ChatboxContainer extends React.Component {
 
   handleClick(e) {
     const branchID = e.target.textContent;
-    console.log(e.target.textContent);
+
     let objToSend = JSON.stringify({
       username: 'We made it dad',
       newBranchID: e.target.textContent,
@@ -76,12 +79,36 @@ class ChatboxContainer extends React.Component {
         branchID: branchID
       });
     }
+  }
 
+  handleBack(e) {
+    let objToSend = JSON.stringify({
+      currentBranchID: this.state.branchID
+    });
+
+    request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+
+    function on_response(err, res, body) {
+      if (err) throw new Error(err);
+
+      console.log('body', body);
+
+      this.setState({
+        messages: body[0],
+        branchID: body[1]
+      });
+    }
   }
 
   render() {
+    let arrow;
+    if (this.state.branchID !== 'main') {
+      arrow = <button onClick={this.handleBack}>Back</button>
+    }
+
     return (
       <div>
+        {arrow}
         <Chatbox
           branchID={this.state.branchID}
           messages={this.state.messages}
