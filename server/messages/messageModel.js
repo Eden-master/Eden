@@ -23,7 +23,7 @@ const Message = (banner_ID) => { return db.define(banner_ID, {
 		type: Sequelize.TEXT
 	},
 	branch_id: {
-		type: Sequelize.INTEGER
+		type: Sequelize.STRING
 	},
 	timeStamp: {
 		type: Sequelize.DATE,

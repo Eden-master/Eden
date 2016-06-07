@@ -7,7 +7,7 @@ class ChatboxContainer extends React.Component {
     super();
     this.state = {
       messages: [],
-      bannerID: '1'
+      bannerID: 'main'
     }
 
     this.getData = this.getData.bind(this);
