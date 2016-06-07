@@ -54,25 +54,26 @@ class ChatboxContainer extends React.Component {
     }
   }
 
-  handleClick(e, reactID) {
-    console.log('click heard!', e.target.textContent);
-
+  handleClick(e) {
+    const branchID = e.target.textContent;
+    console.log(e.target.textContent);
     let objToSend = JSON.stringify({
-      username: 'We made it dad!',
+      username: 'We made it dad',
       newBranchID: e.target.textContent,
       oldBranchID: this.state.branchID
     });
 
-    //request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+    request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
 
     function on_response(err, res, body) {
+      console.log(branchID);
       if (err) throw new Error(err);
 
       console.log('body from handleClick after clicking msg', body);
 
       this.setState({
         messages: body,
-        branchID: e.target.textContent
+        branchID: branchID
       });
     }
 

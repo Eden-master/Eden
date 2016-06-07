@@ -4,12 +4,22 @@ const Message = require('./messageModel');
 
 module.exports = {
 	getMessages: function(request, response) {
-    // let data = request.body;
-    // branch_id
-    // console.log('URL, dawg: ', request.url);
-    // console.log('Params, dawg: ', request.query);
     const data = request.query;
 
+    // this conditional handles when we create a new chat branch
+    if (data.fromNewChatBranch) {
+
+      // the first message in the new chat branch is the message we click in the old branch
+      Message(data.branch_id).sync().then(function() {
+        Message(data.branch_id).create({
+          username: data.username,
+          message: data.branch_id,
+          branch_id: data.branch_id
+        })
+      })
+    }
+
+    // get all messages from a particular chat branch 
 		Message(data.branch_id).sync().then(function(){
       Message(data.branch_id).findAll({
         where: {
@@ -19,7 +29,6 @@ module.exports = {
           ['createdAt', 'ASC']
         ]
       }).then(function(messages){
-        // console.log('thurr be messages fromt he db: ', messages);
         response.send(messages);
       });
     });

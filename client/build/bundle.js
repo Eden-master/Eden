@@ -20385,7 +20385,7 @@
 	
 	var _Chatbox2 = _interopRequireDefault(_Chatbox);
 	
-	var _SubmitMsg = __webpack_require__(172);
+	var _SubmitMsg = __webpack_require__(173);
 	
 	var _SubmitMsg2 = _interopRequireDefault(_SubmitMsg);
 	
@@ -20462,25 +20462,26 @@
 	    }
 	  }, {
 	    key: 'handleClick',
-	    value: function handleClick(e, reactID) {
-	      console.log('click heard!', e.target.textContent);
-	
+	    value: function handleClick(e) {
+	      var branchID = e.target.textContent;
+	      console.log(e.target.textContent);
 	      var objToSend = JSON.stringify({
-	        username: 'We made it dad!',
+	        username: 'We made it dad',
 	        newBranchID: e.target.textContent,
 	        oldBranchID: this.state.branchID
 	      });
 	
-	      //request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+	      (0, _browserRequest2.default)({ method: 'POST', url: this.props.url + '/branch', body: objToSend, json: true }, on_response.bind(this));
 	
 	      function on_response(err, res, body) {
+	        console.log(branchID);
 	        if (err) throw new Error(err);
 	
 	        console.log('body from handleClick after clicking msg', body);
 	
 	        this.setState({
 	          messages: body,
-	          branchID: e.target.textContent
+	          branchID: branchID
 	        });
 	      }
 	    }
@@ -21051,7 +21052,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Message = __webpack_require__(173);
+	var _Message = __webpack_require__(172);
 	
 	var _Message2 = _interopRequireDefault(_Message);
 	
@@ -21086,28 +21087,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function SubmitMsg(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement('input', { onKeyDown: props.handleEnter, value: props.text, onChange: props.update })
-	  );
-	}
-	
-	module.exports = SubmitMsg;
-
-/***/ },
-/* 173 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	function Message(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -21121,6 +21100,28 @@
 	}
 	
 	module.exports = Message;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function SubmitMsg(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('input', { onKeyDown: props.handleEnter, value: props.text, onChange: props.update })
+	  );
+	}
+	
+	module.exports = SubmitMsg;
 
 /***/ }
 /******/ ]);
