@@ -24,9 +24,9 @@ class ChatboxContainer extends React.Component {
 
   getData() {
     request(this.props.url + '/messages?branch_id=' + this.state.branchID, (err, res, body) => {
-        this.setState({
-          messages: JSON.parse(body)
-        });
+      this.setState({
+        messages: JSON.parse(body)
+      });
     });
   }
 

@@ -56,7 +56,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ChatboxContainer = __webpack_require__(168);
+	var _ChatboxContainer = __webpack_require__(230);
 	
 	var _ChatboxContainer2 = _interopRequireDefault(_ChatboxContainer);
 	
@@ -20366,7 +20366,69 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 168 */
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20377,15 +20439,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _browserRequest = __webpack_require__(169);
+	var _browserRequest = __webpack_require__(231);
 	
 	var _browserRequest2 = _interopRequireDefault(_browserRequest);
 	
-	var _Chatbox = __webpack_require__(170);
+	var _Chatbox = __webpack_require__(232);
 	
 	var _Chatbox2 = _interopRequireDefault(_Chatbox);
 	
-	var _SubmitMsg = __webpack_require__(173);
+	var _SubmitMsg = __webpack_require__(235);
 	
 	var _SubmitMsg2 = _interopRequireDefault(_SubmitMsg);
 	
@@ -20509,7 +20571,7 @@
 	module.exports = ChatboxContainer;
 
 /***/ },
-/* 169 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Browser Request
@@ -21009,7 +21071,7 @@
 
 
 /***/ },
-/* 170 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21018,7 +21080,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Messages = __webpack_require__(171);
+	var _Messages = __webpack_require__(233);
 	
 	var _Messages2 = _interopRequireDefault(_Messages);
 	
@@ -21043,7 +21105,7 @@
 	module.exports = Chatbox;
 
 /***/ },
-/* 171 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21052,7 +21114,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Message = __webpack_require__(172);
+	var _Message = __webpack_require__(234);
 	
 	var _Message2 = _interopRequireDefault(_Message);
 	
@@ -21076,7 +21138,7 @@
 	module.exports = Messages;
 
 /***/ },
-/* 172 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21102,7 +21164,7 @@
 	module.exports = Message;
 
 /***/ },
-/* 173 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
