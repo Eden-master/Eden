@@ -20407,7 +20407,7 @@
 	
 	    _this.state = {
 	      messages: [],
-	      bannerID: 'main',
+	      branchID: 'main',
 	      inputText: ''
 	    };
 	
@@ -20427,7 +20427,7 @@
 	    value: function getData() {
 	      var _this2 = this;
 	
-	      (0, _browserRequest2.default)(this.props.url + '/messages?branch_id=' + this.state.bannerID, function (err, res, body) {
+	      (0, _browserRequest2.default)(this.props.url + '/messages?branch_id=' + this.state.branchID, function (err, res, body) {
 	        _this2.setState({
 	          messages: JSON.parse(body)
 	        });
@@ -20451,12 +20451,12 @@
 	        var objToSend = JSON.stringify({
 	          username: 'werollin',
 	          message: this.state.inputText,
-	          branch_id: this.state.bannerID
+	          branch_id: this.state.branchID
 	        });
 	
 	        this.setState({ inputText: '' });
 	
-	        (0, _browserRequest2.default)({ method: 'POST', url: this.props.url + '/messages?branch_id=' + this.state.bannerID, body: objToSend, json: true }, on_response.bind(this));
+	        (0, _browserRequest2.default)({ method: 'POST', url: this.props.url + '/messages?branch_id=' + this.state.branchID, body: objToSend, json: true }, on_response.bind(this));
 	      }
 	    }
 	  }, {

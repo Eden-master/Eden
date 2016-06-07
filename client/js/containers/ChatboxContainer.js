@@ -8,7 +8,7 @@ class ChatboxContainer extends React.Component {
     super();
     this.state = {
       messages: [],
-      bannerID: 'main',
+      branchID: 'main',
       inputText: ''
     }
 
@@ -22,7 +22,7 @@ class ChatboxContainer extends React.Component {
   }
 
   getData() {
-    request(this.props.url + '/messages?branch_id=' + this.state.bannerID, (err, res, body) => {
+    request(this.props.url + '/messages?branch_id=' + this.state.branchID, (err, res, body) => {
         this.setState({
           messages: JSON.parse(body)
         });
@@ -38,12 +38,12 @@ class ChatboxContainer extends React.Component {
       let objToSend = JSON.stringify({
         username: 'werollin',
         message: this.state.inputText,
-        branch_id: this.state.bannerID
+        branch_id: this.state.branchID
       });
-      
+
       this.setState({inputText: ''});
 
-      request({method:'POST', url: this.props.url + '/messages?branch_id=' + this.state.bannerID, body: objToSend, json:true}, on_response.bind(this));
+      request({method:'POST', url: this.props.url + '/messages?branch_id=' + this.state.branchID, body: objToSend, json:true}, on_response.bind(this));
 
       function on_response(err, res, body) {
         if (err) throw new Error(err);
