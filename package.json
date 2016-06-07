@@ -4,7 +4,7 @@
   "description": "The awesomest branching chat app ever made",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server && webpack",
+    "start": "nodemon server/server",
     "test": "./test/*.js"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "bootstrap": "^3.3.6",
+    "browser-request": "^0.3.3",
     "express": "^4.13.4",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
