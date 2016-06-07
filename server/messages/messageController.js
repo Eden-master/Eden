@@ -28,7 +28,7 @@ module.exports = {
 	postMessages: function(request, response) {
     const data = request.body;
 		Message(data.branch_id).sync().then(function(){
-			return Message(data.branch_id).create(request.body);
+			Message(data.branch_id).create(request.body).then(message => response.send(message));
 		});
 	}
 }

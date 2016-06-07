@@ -35,18 +35,17 @@ class ChatboxContainer extends React.Component {
         branch_id: this.state.bannerID
       });
 
-      request({method:'POST', url: this.props.url + '/messages?branch_id=' + this.state.bannerID, body: objToSend, json:true}, on_response);
+      request({method:'POST', url: this.props.url + '/messages?branch_id=' + this.state.bannerID, body: objToSend, json:true}, on_response.bind(this));
 
-      const on_response = (err, res, body) => {
+      function on_response(err, res, body) {
         if (err) throw new Error(err);
-
-        console.log('response', response);
-      };
+      
+        this.setState({messages: this.state.messages.concat([body])});
+      }
     }
   }
 
   render() {
-    console.log('banner', this.state.bannerID);
     return (
       <div>
         <Chatbox messages={this.state.messages}/>
