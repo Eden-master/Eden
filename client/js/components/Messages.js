@@ -2,7 +2,7 @@ import React from 'react';
 
 function Messages(props) {
   const messages = props.messages.map( (msgObj, index) => {
-    return <li>{msgObj.message}</li>
+    return <li key={index}>{msgObj.message}</li>
   });
 
   return (
