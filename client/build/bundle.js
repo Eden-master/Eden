@@ -20459,6 +20459,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// const socket = io.connect('http://localhost:3000');
+	
 	var ChatboxContainer = function (_React$Component) {
 	  _inherits(ChatboxContainer, _React$Component);
 	
@@ -20477,6 +20479,7 @@
 	    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
 	    _this.updateText = _this.updateText.bind(_this);
 	    _this.handleClick = _this.handleClick.bind(_this);
+	    _this.handleBack = _this.handleBack.bind(_this);
 	    return _this;
 	  }
 	
@@ -20526,7 +20529,7 @@
 	    key: 'handleClick',
 	    value: function handleClick(e) {
 	      var branchID = e.target.textContent;
-	      console.log(e.target.textContent);
+	
 	      var objToSend = JSON.stringify({
 	        username: 'We made it dad',
 	        newBranchID: e.target.textContent,
@@ -20548,11 +20551,41 @@
 	      }
 	    }
 	  }, {
+	    key: 'handleBack',
+	    value: function handleBack(e) {
+	      var objToSend = JSON.stringify({
+	        currentBranchID: this.state.branchID
+	      });
+	
+	      (0, _browserRequest2.default)({ method: 'POST', url: this.props.url + '/branch', body: objToSend, json: true }, on_response.bind(this));
+	
+	      function on_response(err, res, body) {
+	        if (err) throw new Error(err);
+	
+	        console.log('body', body);
+	
+	        this.setState({
+	          messages: body[0],
+	          branchID: body[1]
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var arrow = void 0;
+	      if (this.state.branchID !== 'main') {
+	        arrow = _react2.default.createElement(
+	          'button',
+	          { onClick: this.handleBack },
+	          'Back'
+	        );
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        arrow,
 	        _react2.default.createElement(_Chatbox2.default, {
 	          branchID: this.state.branchID,
 	          messages: this.state.messages,
