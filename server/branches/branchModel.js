@@ -23,10 +23,10 @@ const Branch = db.define('branch', {
 		primaryKey: true,
 		autoIncrement: true
 	},
-	messageId: {
+	newBranchID: {
 		type: Sequelize.INTEGER
 	},
-	parentId: {
+	oldBranchID: {
 		type: Sequelize.INTEGER
 	}
 });
