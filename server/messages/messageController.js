@@ -6,10 +6,10 @@ module.exports = {
 	getMessages: function(request, response) {
     const data = request.query;
 
-    // this conditional handles when we create a new chat branch
+    // if we create a new chat branch
     if (data.fromNewChatBranch) {
 
-      // the first message in the new chat branch is the message we click in the old branch
+      // the first message in the new chat branch is the message we click on in the old branch
       Message(data.branch_id).sync().then(function() {
         Message(data.branch_id).create({
           username: data.username,
@@ -29,7 +29,8 @@ module.exports = {
           ['createdAt', 'ASC']
         ]
       }).then(function(messages){
-        response.send(messages);
+        if (data.gettingPreviousBranch) response.send([messages, data.branch_id])
+        else response.send(messages);
       });
     });
 	},

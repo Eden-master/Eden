@@ -28,7 +28,10 @@ const Branch = db.define('branch', {
 	},
 	oldBranchID: {
 		type: Sequelize.STRING
-	}
+	},
+	username: {
+		type: Sequelize.STRING
+	},
 });
 
 module.exports = Branch;

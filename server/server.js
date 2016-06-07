@@ -15,8 +15,7 @@ app.get('/messages', messageController.getMessages);
 app.post('/messages', messageController.postMessages);
 
 app.post('/branch', branchController.createBranch, messageController.getMessages);
-
-//app.post('/branch' zomgBranchMethodz!);
+app.post('/back', branchController.getPreviousBranch, messageController.getMessages);
 
 app.listen(3000, () => {
   console.log('listening on port 3000');
