@@ -10,7 +10,7 @@ const db = require('../database/model/dbModel');
  * timestamp: is not really necessary as all squeslize tables automagically
  * get a "createdBy" and "createdAt" column that deals with timestamps
  */
-const Message = db.define('message', {
+const Message = (banner_ID) => { return db.define(banner_ID, {
 	_id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -23,12 +23,12 @@ const Message = db.define('message', {
 		type: Sequelize.TEXT
 	},
 	branch_id: {
-		type: Sequelize.INTEGER
+		type: Sequelize.STRING
 	},
 	timeStamp: {
 		type: Sequelize.DATE,
 		defaultValue: Sequelize.fn('now')
 	}
-});
+})};
 
 module.exports = Message;

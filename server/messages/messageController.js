@@ -8,10 +8,10 @@ module.exports = {
     // branch_id
     // console.log('URL, dawg: ', request.url);
     // console.log('Params, dawg: ', request.query);
-    let data = request.query;
+    const data = request.query;
 
-		Message.sync().then(function(){
-      Message.findAll({
+		Message(data.branch_id).sync().then(function(){
+      Message(data.branch_id).findAll({
         where: {
           branch_id: data.branch_id
         },
@@ -26,9 +26,9 @@ module.exports = {
 	},
 
 	postMessages: function(request, response) {
-    // console.log('MY BODYY: ', request.body);
-		Message.sync().then(function(){
-			return Message.create(request.body);
+    const data = request.body;
+		Message(data.branch_id).sync().then(function(){
+			return Message(data.branch_id).create(request.body);
 		});
 	}
 }
