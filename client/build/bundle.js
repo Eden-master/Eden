@@ -20414,6 +20414,7 @@
 	    _this.getData = _this.getData.bind(_this);
 	    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
 	    _this.updateText = _this.updateText.bind(_this);
+	    _this.handleClick = _this.handleClick.bind(_this);
 	    return _this;
 	  }
 	
@@ -20460,13 +20461,37 @@
 	      }
 	    }
 	  }, {
+	    key: 'handleClick',
+	    value: function handleClick(e) {
+	      var branchID = e.target.textContent;
+	      console.log(e.target.textContent);
+	      var objToSend = JSON.stringify({
+	        username: 'We made it dad',
+	        newBranchID: e.target.textContent,
+	        oldBranchID: this.state.branchID
+	      });
+	
+	      (0, _browserRequest2.default)({ method: 'POST', url: this.props.url + '/branch', body: objToSend, json: true }, on_response.bind(this));
+	
+	      function on_response(err, res, body) {
+	        console.log(branchID);
+	        if (err) throw new Error(err);
+	        console.log('body from handleClick after clicking msg', body);
+	
+	        this.setState({
+	          messages: body,
+	          branchID: branchID
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Chatbox2.default, { messages: this.state.messages }),
-	        _react2.default.createElement(_SubmitMsg2.default, { handleClick: this.handleKeyPress, text: this.state.inputText, update: this.updateText })
+	        _react2.default.createElement(_Chatbox2.default, { branchID: this.state.branchID, messages: this.state.messages, handleClick: this.handleClick }),
+	        _react2.default.createElement(_SubmitMsg2.default, { handleEnter: this.handleKeyPress, text: this.state.inputText, update: this.updateText })
 	      );
 	    }
 	  }]);
@@ -20496,7 +20521,12 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_Messages2.default, { messages: props.messages })
+	    _react2.default.createElement(
+	      'div',
+	      { id: 'branchID' },
+	      props.branchID
+	    ),
+	    _react2.default.createElement(_Messages2.default, { messages: props.messages, handleClick: props.handleClick })
 	  );
 	}
 	
@@ -20518,7 +20548,7 @@
 	  var messages = props.messages.map(function (msgObj, index) {
 	    return _react2.default.createElement(
 	      'li',
-	      { key: index },
+	      { key: index, onClick: props.handleClick },
 	      msgObj.message
 	    );
 	  });
@@ -21048,7 +21078,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement('input', { onKeyDown: props.handleClick, value: props.text, onChange: props.update })
+	    _react2.default.createElement('input', { onKeyDown: props.handleEnter, value: props.text, onChange: props.update })
 	  );
 	}
 	

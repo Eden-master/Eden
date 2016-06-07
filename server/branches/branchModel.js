@@ -24,10 +24,10 @@ const Branch = db.define('branch', {
 		autoIncrement: true
 	},
 	newBranchID: {
-		type: Sequelize.INTEGER
+		type: Sequelize.STRING
 	},
 	oldBranchID: {
-		type: Sequelize.INTEGER
+		type: Sequelize.STRING
 	}
 });
 

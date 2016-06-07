@@ -15,6 +15,7 @@ class ChatboxContainer extends React.Component {
     this.getData = this.getData.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.updateText = this.updateText.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -53,11 +54,35 @@ class ChatboxContainer extends React.Component {
     }
   }
 
+  handleClick(e) {
+    const branchID = e.target.textContent;
+    console.log(e.target.textContent);
+    let objToSend = JSON.stringify({
+      username: 'We made it dad',
+      newBranchID: e.target.textContent,
+      oldBranchID: this.state.branchID
+    });
+
+    request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+
+    function on_response(err, res, body) {
+      console.log(branchID);
+      if (err) throw new Error(err);
+      console.log('body from handleClick after clicking msg', body);
+
+      this.setState({
+        messages: body,
+        branchID: branchID
+      });
+    }
+
+  }
+
   render() {
     return (
       <div>
-        <Chatbox messages={this.state.messages}/>
-        <SubmitMsg handleClick={this.handleKeyPress} text={this.state.inputText} update={this.updateText}/>
+        <Chatbox branchID={this.state.branchID} messages={this.state.messages} handleClick={this.handleClick}/>
+        <SubmitMsg handleEnter={this.handleKeyPress} text={this.state.inputText} update={this.updateText}/>
       </div>
     );
   }
