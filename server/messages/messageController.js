@@ -10,8 +10,8 @@ module.exports = {
     // console.log('Params, dawg: ', request.query);
     let data = request.query;
 
-		Message.sync().then(function(){
-      Message.findAll({
+		Message('message').sync().then(function(){
+      Message('message').findAll({
         where: {
           branch_id: data.branch_id
         },
@@ -27,8 +27,8 @@ module.exports = {
 
 	postMessages: function(request, response) {
     // console.log('MY BODYY: ', request.body);
-		Message.sync().then(function(){
-			return Message.create(request.body);
+		Message('message').sync().then(function(){
+			return Message('message').create(request.body);
 		});
 	}
 }
