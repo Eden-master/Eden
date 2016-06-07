@@ -42,6 +42,11 @@ li {
 	list-style-type: none;
 }
 
+#branchID {
+  text-align: center;
+  font-size: 2em;
+}
+
 .chatform{
 	/*margin-top:60%;*/
 }
