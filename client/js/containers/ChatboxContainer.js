@@ -8,10 +8,11 @@ class ChatboxContainer extends React.Component {
     super();
     this.state = {
       messages: [],
-      bannerID: '1'
+      bannerID: 'main'
     }
 
     this.getData = this.getData.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +29,6 @@ class ChatboxContainer extends React.Component {
 
   handleKeyPress(e) {
     if (e.keyCode === 13) {
-      console.log(this.state.bannerID);
       let objToSend = JSON.stringify({
         username: 'werollin',
         message: e.target.value,
@@ -46,6 +46,7 @@ class ChatboxContainer extends React.Component {
   }
 
   render() {
+    console.log('banner', this.state.bannerID);
     return (
       <div>
         <Chatbox messages={this.state.messages}/>
