@@ -20462,13 +20462,16 @@
 	    }
 	  }, {
 	    key: 'handleClick',
-	    value: function handleClick(e) {
+	    value: function handleClick(e, reactID) {
+	      console.log('click heard!', e.target.textContent);
+	
 	      var objToSend = JSON.stringify({
+	        username: 'We made it dad!',
 	        newBranchID: e.target.textContent,
 	        oldBranchID: this.state.branchID
 	      });
 	
-	      (0, _browserRequest2.default)({ method: 'POST', url: this.props.url + '/branch', body: objToSend, json: true }, on_response.bind(this));
+	      //request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
 	
 	      function on_response(err, res, body) {
 	        if (err) throw new Error(err);
@@ -20487,8 +20490,14 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Chatbox2.default, { branchID: this.state.branchID, messages: this.state.messages, handleClick: this.handleClick }),
-	        _react2.default.createElement(_SubmitMsg2.default, { handleEnter: this.handleKeyPress, text: this.state.inputText, update: this.updateText })
+	        _react2.default.createElement(_Chatbox2.default, {
+	          branchID: this.state.branchID,
+	          messages: this.state.messages,
+	          handleClick: this.handleClick }),
+	        _react2.default.createElement(_SubmitMsg2.default, {
+	          handleEnter: this.handleKeyPress,
+	          text: this.state.inputText,
+	          update: this.updateText })
 	      );
 	    }
 	  }]);
@@ -21023,7 +21032,10 @@
 	      { id: 'branchID' },
 	      props.branchID
 	    ),
-	    _react2.default.createElement(_Messages2.default, { messages: props.messages, handleClick: props.handleClick })
+	    _react2.default.createElement(_Messages2.default, {
+	      messages: props.messages,
+	      handleClick: props.handleClick,
+	      branchID: props.branchID })
 	  );
 	}
 	
@@ -21039,15 +21051,18 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Message = __webpack_require__(173);
+	
+	var _Message2 = _interopRequireDefault(_Message);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function Messages(props) {
 	  var messages = props.messages.map(function (msgObj, index) {
-	    return _react2.default.createElement(
-	      'li',
-	      { key: index, onClick: props.handleClick },
-	      msgObj.message
-	    );
+	    return _react2.default.createElement(_Message2.default, {
+	      key: index,
+	      handleClick: props.handleClick,
+	      message: msgObj.message });
 	  });
 	
 	  return _react2.default.createElement(
@@ -21080,6 +21095,32 @@
 	}
 	
 	module.exports = SubmitMsg;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function Message(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'li',
+	      { onClick: props.handleClick },
+	      props.message
+	    )
+	  );
+	}
+	
+	module.exports = Message;
 
 /***/ }
 /******/ ]);

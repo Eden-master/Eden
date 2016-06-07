@@ -54,13 +54,16 @@ class ChatboxContainer extends React.Component {
     }
   }
 
-  handleClick(e) {
+  handleClick(e, reactID) {
+    console.log('click heard!', e.target.textContent);
+
     let objToSend = JSON.stringify({
+      username: 'We made it dad!',
       newBranchID: e.target.textContent,
       oldBranchID: this.state.branchID
     });
 
-    request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+    //request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
 
     function on_response(err, res, body) {
       if (err) throw new Error(err);
@@ -78,8 +81,14 @@ class ChatboxContainer extends React.Component {
   render() {
     return (
       <div>
-        <Chatbox branchID={this.state.branchID} messages={this.state.messages} handleClick={this.handleClick}/>
-        <SubmitMsg handleEnter={this.handleKeyPress} text={this.state.inputText} update={this.updateText}/>
+        <Chatbox
+          branchID={this.state.branchID}
+          messages={this.state.messages}
+          handleClick={this.handleClick} />
+        <SubmitMsg
+          handleEnter={this.handleKeyPress}
+          text={this.state.inputText}
+          update={this.updateText} />
       </div>
     );
   }

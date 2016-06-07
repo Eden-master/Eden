@@ -5,7 +5,10 @@ function Chatbox(props) {
   return (
     <div>
       <div id="branchID">{props.branchID}</div>
-      <Messages messages={props.messages} handleClick={props.handleClick}/>
+      <Messages
+        messages={props.messages}
+        handleClick={props.handleClick}
+        branchID={props.branchID}/>
     </div>
   );
 }

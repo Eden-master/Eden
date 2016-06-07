@@ -1,8 +1,12 @@
 import React from 'react';
+import Message from './Message';
 
 function Messages(props) {
   const messages = props.messages.map( (msgObj, index) => {
-    return <li key={index} onClick={props.handleClick}>{msgObj.message}</li>
+    return <Message
+            key={index}
+            handleClick={props.handleClick}
+            message={msgObj.message} />
   });
 
   return (
