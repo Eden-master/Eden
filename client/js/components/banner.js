@@ -1,10 +1,6 @@
-'use strict';
-
-
-let React = require('react');
-let Banner = React.createClass ({
-
-	render: function(){
+const React = require('react');
+const Banner = React.createClass ({
+	render: function() {
 		let currentBranch = this.props.branch;
 		let msg = this.props.data;
 		return (

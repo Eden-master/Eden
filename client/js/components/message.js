@@ -1,14 +1,13 @@
-'use strict';
+const React = require('react');
 
-
-let React = require('react');
-
-let Message = React.createClass ({
-	messageHandler: function(){
-		return this.props.onClicky(this.props.index)
+const Message = React.createClass ({
+	messageHandler: function() {
+	   this.props.onClicky(this.props.index)
 	},
-	render: function(){
+  
+	render: function() {
 		let msg = this.props.data;
+
 		return (
 			<ul className="msg">
 				<strong>{msg.author}</strong>
@@ -19,5 +18,3 @@ let Message = React.createClass ({
 });
 
 module.exports = Message;
-
-

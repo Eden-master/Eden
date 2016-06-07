@@ -1,13 +1,11 @@
-'use strict';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Display = require('./components/chatController.js');
 
-let React = require('react');
-let ReactDOM = require('react-dom');
-let Display = require('./components/chatController.js')
+//const ChatWindow = require('./components/chat');
+//const CalendarWindow = require('./components/calendar');
 
-//var ChatWindow = require('./components/chat');
-//var CalendarWindow = require('./components/calendar');
-
-let App = React.createClass({
+const App = React.createClass ({
   render: function() {
     return (
       <div className="container">
@@ -16,6 +14,5 @@ let App = React.createClass({
     );
   }
 });
-
 
 ReactDOM.render(<App />, document.getElementById('content'));
