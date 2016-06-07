@@ -1,18 +1,18 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Display = require('./components/chatController.js');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ChatboxContainer from './containers/ChatboxContainer';
 
-//let ChatWindow = require('./components/chat');
-//let CalendarWindow = require('./components/calendar');
-
-const App = React.createClass ({
-  render: () => {
+class Main extends React.Component {
+  render() {
     return (
-      <div className="container">
-      	<Display pollInterval={3000} url="http://localhost:3000/"/>
+      <div>
+        <h1>Eden</h1>
+        <div className='container'>
+          <ChatboxContainer url="http://localhost:3000"/>
+        </div>
       </div>
     );
   }
-});
+}
 
-ReactDOM.render(<App />, document.getElementById('content'));
+ReactDOM.render(<Main />, document.getElementById('content'));
