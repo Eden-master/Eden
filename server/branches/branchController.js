@@ -24,6 +24,7 @@ module.exports = {
 
   // when we want an array list of all existing branches
   getAllTheBranches: function(request, response) {
+    console.log('where we should be');
     Branch.sync().then(function() {
       Branch.findAll({
         attr: ["newBranchID"],
@@ -46,7 +47,7 @@ module.exports = {
           newBranchID: request.body.newBranchID,
         }
       }).then(function(results) {
-        // if a chat branch doesn't exist, then create and store it 
+        // if a chat branch doesn't exist, then create and store it
         if (results.length === 0) {
           Branch.create(request.body);
           request.query.fromNewChatBranch = true;

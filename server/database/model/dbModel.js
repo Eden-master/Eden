@@ -9,6 +9,7 @@ const user = require('./../../../config.js');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(`postgres://${user.userInfo}@localhost/${user.dbName}`);
 
+
 /* This authenticate function runs a simple query (1+1) on the database
  * to make sure you're connected. It is asynchronous, and does not affect
  * the sequelize object created above.
