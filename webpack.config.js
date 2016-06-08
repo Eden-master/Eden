@@ -3,9 +3,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './client/js/main.js',
+    entry: './client/js/app.js',
     output: {path: __dirname +'/client/build', filename: 'bundle.js'},
-    devtools: 'source map',
+    devtool: 'source-map',
     module: {
         loaders: [
             {
@@ -20,10 +20,10 @@ module.exports = {
     },
 
     // minifying jsx
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        })
-    ],
+    // plugins: [
+    //     new webpack.optimize.UglifyJsPlugin({
+    //       compress: { warnings: false }
+    //     })
+    // ],
     watch: true,
 }

@@ -23,15 +23,28 @@ button{
 
 input{
 	opacity: 0.8;
+  display: block;
+  margin: 0 auto;
 }
 
-.msg{
-	text-align: center;
+ul {
+  display: block;
+  text-align: center;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
 }
 
 .banner{
 	text-align: center;
 	list-style-type: none;
+}
+
+#branchID {
+  text-align: center;
+  font-size: 2em;
 }
 
 .chatform{

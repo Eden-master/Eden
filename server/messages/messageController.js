@@ -4,14 +4,24 @@ const Message = require('./messageModel');
 
 module.exports = {
 	getMessages: function(request, response) {
-    // let data = request.body;
-    // branch_id
-    // console.log('URL, dawg: ', request.url);
-    // console.log('Params, dawg: ', request.query);
-    let data = request.query;
+    const data = request.query;
 
-		Message.sync().then(function(){
-      Message.findAll({
+    // if we create a new chat branch
+    if (data.fromNewChatBranch) {
+
+      // the first message in the new chat branch is the message we click on in the old branch
+      Message(data.branch_id).sync().then(function() {
+        Message(data.branch_id).create({
+          username: data.username,
+          message: data.branch_id,
+          branch_id: data.branch_id
+        })
+      })
+    }
+
+    // get all messages from a particular chat branch 
+		Message(data.branch_id).sync().then(function(){
+      Message(data.branch_id).findAll({
         where: {
           branch_id: data.branch_id
         },
@@ -19,16 +29,19 @@ module.exports = {
           ['createdAt', 'ASC']
         ]
       }).then(function(messages){
-        // console.log('thurr be messages fromt he db: ', messages);
-        response.send(messages);
+
+        // if we're traversing backwards, send a response object
+        // inside the object, include the name of the older branch and its messages
+        if (data.gettingPreviousBranch) response.send([messages, data.branch_id])
+        else response.send(messages);
       });
     });
 	},
 
 	postMessages: function(request, response) {
-    // console.log('MY BODYY: ', request.body);
-		Message.sync().then(function(){
-			return Message.create(request.body);
+    const data = request.body;
+		Message(data.branch_id).sync().then(function(){
+			Message(data.branch_id).create(request.body).then(message => response.send(message));
 		});
 	}
 }

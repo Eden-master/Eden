@@ -1,5 +1,5 @@
-# chattree
-##The awesomest branching chat app ever made
+# Eden
+##The bestest branching chat app ever made
 
 We decrease the number of notifications in a group chat by allowing users to respond and receive messages for only the messages and topics they are interested in. Users will create a new chat window by clicking on a message, at which point a new chat window will appear to continue the conversation. Users who are not interested in the conversation will not receive any notifications for that specfic chat branch.
 
@@ -11,7 +11,9 @@ We decrease the number of notifications in a group chat by allowing users to res
 
 
 ## Technology Stack
-* React 
+* React
+* Express
+* Node
 * PostgreSQL
 
 ##tl;dr

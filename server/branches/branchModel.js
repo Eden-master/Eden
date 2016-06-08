@@ -23,12 +23,15 @@ const Branch = db.define('branch', {
 		primaryKey: true,
 		autoIncrement: true
 	},
-	messageId: {
-		type: Sequelize.INTEGER
+	newBranchID: {
+		type: Sequelize.STRING
 	},
-	parentId: {
-		type: Sequelize.INTEGER
-	}
+	oldBranchID: {
+		type: Sequelize.STRING
+	},
+	username: {
+		type: Sequelize.STRING
+	},
 });
 
 module.exports = Branch;
