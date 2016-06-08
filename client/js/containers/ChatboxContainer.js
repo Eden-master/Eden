@@ -5,9 +5,14 @@ import SubmitMsg from '../components/SubmitMsg';
 
 // const socket = io.connect('http://localhost:3000');
 
+//contains all logic
 class ChatboxContainer extends React.Component {
   constructor() {
     super();
+
+    //messages will be the list of messages rendered onto the Chatbox component
+    //branchID is the current branchID of the chatbox
+    //inputText is for inputting a message to be added to messages
     this.state = {
       messages: [],
       branchID: 'main',
@@ -21,6 +26,7 @@ class ChatboxContainer extends React.Component {
     this.handleBack = this.handleBack.bind(this);
   }
 
+  //gets messages from table that matches current branchID
   componentDidMount() {
     this.getData();
   }
@@ -37,6 +43,7 @@ class ChatboxContainer extends React.Component {
     this.setState({inputText: e.target.value});
   }
 
+  //event handler for input box
   handleKeyPress(e) {
     if (e.keyCode === 13) {
       let objToSend = JSON.stringify({
@@ -45,8 +52,10 @@ class ChatboxContainer extends React.Component {
         branch_id: this.state.branchID
       });
 
+      //revert inputText back to empty string
       this.setState({inputText: ''});
 
+      //get updated table with message from input box
       request({method:'POST', url: this.props.url + '/messages?branch_id=' + this.state.branchID, body: objToSend, json:true}, on_response.bind(this));
 
       function on_response(err, res, body) {
@@ -58,6 +67,7 @@ class ChatboxContainer extends React.Component {
   }
 
   handleClick(e) {
+    //the message clicked from the chatbox
     const branchID = e.target.textContent;
 
     let objToSend = JSON.stringify({
@@ -66,6 +76,7 @@ class ChatboxContainer extends React.Component {
       oldBranchID: this.state.branchID
     });
 
+    //receive new messages from table related to message clicked from chatbox
     request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
 
     function on_response(err, res, body) {
@@ -86,7 +97,8 @@ class ChatboxContainer extends React.Component {
       currentBranchID: this.state.branchID
     });
 
-    request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+    //gets data from parent branch (renders parent's messages)
+    request({method:'POST', url: this.props.url + '/back', body: objToSend, json:true}, on_response.bind(this));
 
     function on_response(err, res, body) {
       if (err) throw new Error(err);
@@ -101,6 +113,7 @@ class ChatboxContainer extends React.Component {
   }
 
   render() {
+    //only renders back button if not in main branch
     let arrow;
     if (this.state.branchID !== 'main') {
       arrow = <button onClick={this.handleBack}>Back</button>
