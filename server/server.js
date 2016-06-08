@@ -17,6 +17,7 @@ app.post('/messages', messageController.postMessages);
 
 app.post('/branch', branchController.createBranch, messageController.getMessages);
 app.post('/back', branchController.getPreviousBranch, messageController.getMessages);
+app.post('/everything', branchController.getAllTheBranches);
 
 app.listen(3000, () => {
   console.log('listening on port 3000');
