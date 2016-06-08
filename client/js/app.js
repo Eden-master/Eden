@@ -46,18 +46,35 @@ class App extends React.Component {
     let node = document.createElement('div');
 
     let svg = d3.select(node).append('svg')
-      .attr('width', 1000);
+      .attr('width', 2000).attr('height', 2000);
 
-    let circle = svg.selectAll("circle")
-      .data(arrayOfBranches, function(d) { return d; });
+    let dataForCircles = svg.selectAll('g')
+      .data(arrayOfBranches);
 
-    circle.enter().append("circle")
-      .style('fill', 'orange')
-      .attr("cy", 60)
-      .attr("cx", function(d, i) { return i * 100 + 30; })
-      .attr("r", function(d) { return 20; })
+    let wrapperDiv = dataForCircles.enter()
+      .append('g')
+      .attr('transform', function(d, i) {
+        console.log(i)
+        return `translate(${i*130 + 50}, 80)`
+      })
+
+    let circle = wrapperDiv.append('circle')
+      .attr('fill', 'white')
+      .attr('stroke', 'black')
+      .attr('r', function(d) { return 50; })
       .on('mouseover', function() {
          d3.select(this).style('fill', 'steelblue');
+      }).on('mouseout', function() {
+         d3.select(this).style('fill', 'white');
+      })
+
+    wrapperDiv.append('text')
+      .attr('dx', function(d) { return -40; })
+      .text(function(d) { 
+        if (d.length > 12) {
+          d = d.substr(0, 11) + '...'; 
+        }
+        return d;
       })
     return node;
   }
