@@ -54,7 +54,6 @@ class App extends React.Component {
     let wrapperDiv = dataForCircles.enter()
       .append('g')
       .attr('transform', function(d, i) {
-        console.log(i)
         return `translate(${i*130 + 50}, 80)`
       })
 
@@ -75,7 +74,12 @@ class App extends React.Component {
           d = d.substr(0, 11) + '...'; 
         }
         return d;
-      })
+      }).on('click', function(event) {
+        this.setState({renderGUI: false, branchID: event});
+        console.log(event);
+        console.log(typeof event);
+
+      }.bind(this));
     return node;
   }
 
