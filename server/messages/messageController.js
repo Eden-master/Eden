@@ -29,6 +29,9 @@ module.exports = {
           ['createdAt', 'ASC']
         ]
       }).then(function(messages){
+
+        // if we're traversing backwards, send a response object
+        // inside the object, include the name of the older branch and its messages
         if (data.gettingPreviousBranch) response.send([messages, data.branch_id])
         else response.send(messages);
       });
