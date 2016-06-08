@@ -7,15 +7,15 @@ import SubmitMsg from '../components/SubmitMsg';
 
 //contains all logic
 class ChatboxContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     //messages will be the list of messages rendered onto the Chatbox component
     //branchID is the current branchID of the chatbox
     //inputText is for inputting a message to be added to messages
     this.state = {
       messages: [],
-      branchID: 'main',
+      branchID: this.props.branchID,
       inputText: ''
     }
 
@@ -130,6 +130,7 @@ class ChatboxContainer extends React.Component {
           handleEnter={this.handleKeyPress}
           text={this.state.inputText}
           update={this.updateText} />
+        <button onClick={this.props.handleVisualizeClick}>Visualize</button>
       </div>
     );
   }
