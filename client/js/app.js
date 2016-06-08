@@ -10,7 +10,8 @@ class App extends React.Component {
 
     this.state = {
       renderGUI: false,
-      branchID: 'main'
+      branchID: 'main',
+      listOfBranches: []
     }
 
     this.handleVisualizeClick = this.handleVisualizeClick.bind(this);
@@ -22,13 +23,16 @@ class App extends React.Component {
   }
 
   handleGUIClick(e) {
-    this.setState({renderGUI: false});
+    console.log('e.target from handleGUIClick', e.target.textContent);
+    this.setState({
+      renderGUI: false,
+      branchID: e.target.textContent
+    });
   }
 
   render() {
     let dedicatedView;
-
-    if (!this.state.renderGUI) {
+    if (this.state.renderGUI) {
       dedicatedView =
         <div className='container'>
           <ChatboxContainer
@@ -37,17 +41,23 @@ class App extends React.Component {
             handleVisualizeClick={this.handleVisualizeClick}/>
         </div>
     } else {
-      // request("http://localhost:3000/everything", (err, res, body) => {
-      //   dedicatedView = body;
-      //   dedicatedView.map( (branch, index) => {
-      //     render circle for each branch
-      //   });
-      // });
+      request("http://localhost:3000/everything", (err, res, body) => {
+        if (err) throw new Error(err);
+
+        let temp;
+        temp = JSON.parse(body);
+        temp = temp.map( (branch, index) => {
+          console.log('branch', branch);
+          return <Branch branchID={branch} key={index} handleGUIClick={this.handleGUIClick} />
+        });
+
+        this.setState({listOfBranches: temp});
+      });
     }
 
     return (
       <div>
-        {dedicatedView}
+        {this.state.listOfBranches}
       </div>
     );
   }
