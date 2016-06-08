@@ -20,11 +20,8 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "bootstrap": "^3.3.6",
-<<<<<<< HEAD
     "cookie-parser": "^1.4.3",
-=======
     "browser-request": "^0.3.3",
->>>>>>> 067ea97a6b5197b0826b7c6e8861219a2f6cbd49
     "express": "^4.13.4",
     "googleapis": "^7.1.0",
     "jquery": "^2.2.4",
