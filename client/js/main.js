@@ -6,17 +6,6 @@ const Display = require('./components/chatController.js');
 //const CalendarWindow = require('./components/calendar');
 
 
-constructor(props) {
-   this.state {
-     username: ''
-   }
- }
-
- componentDidMount() {
-   request('/oauth2callback', (err, res, body) => {
-     this.setState({username: body.displayname});
-   })
- }
 
 const App = React.createClass ({
   render: function() {

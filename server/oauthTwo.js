@@ -1,20 +1,33 @@
-module.exports = ()=>{
-var oauth2 = '/oauth2';
-var oauth2callback = '/oauth2callback';
-  //1. Get authorizaion code
+'use strict';
 
-  app.get(oauth2,getAuthCode
-    getAuthCode: (req,res)=>{
+const google = require ('googleapis');
+
+//////////////////////////////////////////
+//Keys:
+var OAuth2 = google.auth.OAuth2;
+var _client_id = "561170070891-jf3eu2fdgh0cdrd9hr0481dqstd8vuds.apps.googleusercontent.com";
+var _client_secret = "79QuJZocoy7l2wXOJN4MLJQI";
+var _redirect_url = 'http://localhost:3000/oauth2callback';
+var plus = google.plus('v1');
+var oauth2Client = new OAuth2(_client_id, _client_secret, _redirect_url);
+
+module.exports = {
+
+
+  //get authentication code from Google
+  getAuthCode: (req,res)=>{
+    google.options({auth:oauth2Client}); //set as global default
     var url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: 'https://www.googleapis.com/auth/plus.login'
     })
     //redirect to API provider site
     res.redirect(url);
-  });
+  },
 
   //2. Get token code
-  app.get(oauth2callback ,(req,res)=>{
+  getTokenCode: (req,res)=>{
+    google.options({auth:oauth2Client}); //set as global default
     var code = req.query.code;
     console.log(code)
 
@@ -23,31 +36,16 @@ var oauth2callback = '/oauth2callback';
         console.log("this is tokens:",tokens)
         res.cookie('token', tokens)
         oauth2Client.setCredentials(tokens);
-        getData(res);
 
+          plus.people.get({userId: 'me', auth: oauth2Client }, (err,response)=>{
+            // console.log(typeof response);
+            var data = response;
+            console.log(data.displayName);
+            //req.username = data.displayName;
+            // res.redirect('/messages');
+          })
+        // }
       }
     })
-  });
-
-  //3. Function that is called inside getToken APi to get client data
-  var getData = (res)=>{
-    plus.people.get({userId: 'me', auth: oauth2Client }, (err,response)=>{
-      // console.log(typeof response);
-      var data = response;
-      console.log(data.displayName);
-      //req.username = data.displayName;
-      // res.redirect('/messages');
-    })
-  }
-
-
-  app.get('/messages', messageController.getMessages);
-  app.post('/messages', messageController.postMessages);
-
-  //app.post('/branch' zomgBranchMethodz!);
-
-  app.listen(3000, () => {
-    console.log('listening on port 3000');
-  });
-
+  },
 }

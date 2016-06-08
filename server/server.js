@@ -5,20 +5,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+const  cookieParser = require('cookie-parser');
 // const data = require('./database/controller/dbController');
 const messageController = require('./messages/messageController');
-var google = require ('googleapis');
-
-//////////////////////////////////////////
-//Keys:
-var OAuth2 = google.auth.OAuth2;
-var _client_id = "561170070891-jf3eu2fdgh0cdrd9hr0481dqstd8vuds.apps.googleusercontent.com";
-var _client_secret = "79QuJZocoy7l2wXOJN4MLJQI";
-var _redirect_url = 'http://localhost:3000/oauth2callback';
-var oauth2Client = new OAuth2(_client_id, _client_secret, _redirect_url);
-google.options({auth:oauth2Client}); //set as global default
-var plus = google.plus('v1');
+const authentication = require('./oauthTwo.js');
 
 ///////////////////////////////////////////
 //Middelware:
@@ -26,8 +16,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname + '/../client')));
 app.use(bodyParser.json());
 
-require('./oauthTwo');
+app.get('/oauth2', authentication.getAuthCode);
+app.get('/oauth2callback', authentication.getTokenCode);
+app.get('/messages', messageController.getMessages);
+app.post('/messages', messageController.postMessages);
 
-function() {
-	//everything I wrote
-}
+
+app.listen(3000, () => {
+	console.log('listening on port 3000');
+});
