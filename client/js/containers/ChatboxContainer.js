@@ -116,7 +116,7 @@ class ChatboxContainer extends React.Component {
     //only renders back button if not in main branch
     let arrow;
     if (this.state.branchID !== 'main') {
-      arrow = <button onClick={this.handleBack}>Back</button>
+      arrow = <button id="backButton" onClick={this.handleBack}>Back</button>
     }
 
     return (
@@ -130,7 +130,6 @@ class ChatboxContainer extends React.Component {
           handleEnter={this.handleKeyPress}
           text={this.state.inputText}
           update={this.updateText} />
-        <button onClick={this.props.handleVisualizeClick}>Visualize</button>
       </div>
     );
   }

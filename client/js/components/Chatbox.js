@@ -4,7 +4,7 @@ import Messages from './Messages';
 function Chatbox(props) {
   return (
     <div>
-      <div id="branchID">{props.branchID}</div>
+      <div id="branchID">{props.branchID + ' chat'}</div>
       <Messages
         messages={props.messages}
         handleClick={props.handleClick}

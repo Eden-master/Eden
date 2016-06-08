@@ -57,6 +57,7 @@ class App extends React.Component {
         return `translate(${i*130 + 50}, 80)`
       })
 
+    // appends circles to g html tag (binds together svg elements)
     let circle = wrapperDiv.append('circle')
       .attr('fill', 'white')
       .attr('stroke', 'black')
@@ -67,18 +68,19 @@ class App extends React.Component {
          d3.select(this).style('fill', 'white');
       })
 
+    // appends text to g html tag
     wrapperDiv.append('text')
       .attr('dx', function(d) { return -40; })
       .text(function(d) { 
+        // if length of branchID string is greater than 12 characters, slice it
         if (d.length > 12) {
           d = d.substr(0, 11) + '...'; 
         }
         return d;
+
+      // GUI click listener that will guide user back to selected chat branch
       }).on('click', function(event) {
         this.setState({renderGUI: false, branchID: event});
-        console.log(event);
-        console.log(typeof event);
-
       }.bind(this));
     return node;
   }
