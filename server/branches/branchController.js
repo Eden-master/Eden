@@ -29,14 +29,14 @@ module.exports = {
         attr: ["newBranchID"],
       }).then(function(results) {
         // results are an array of objects with info about the branchID, its parents, etc.
-        res.send(
+        response.send(
           results.map(function(branchInfo) {
             return branchInfo.newBranchID;
           })
         )
       })
     })
-  }
+  },
 
   // when we click on a message and want to create a new chat branch
 	createBranch: function(request, response, next) {
