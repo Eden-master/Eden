@@ -20,7 +20,9 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "bootstrap": "^3.3.6",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
+    "googleapis": "^7.1.0",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "pg": "^4.5.6",
