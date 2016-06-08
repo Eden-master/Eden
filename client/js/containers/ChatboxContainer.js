@@ -86,7 +86,7 @@ class ChatboxContainer extends React.Component {
       currentBranchID: this.state.branchID
     });
 
-    request({method:'POST', url: this.props.url + '/branch', body: objToSend, json:true}, on_response.bind(this));
+    request({method:'POST', url: this.props.url + '/back', body: objToSend, json:true}, on_response.bind(this));
 
     function on_response(err, res, body) {
       if (err) throw new Error(err);
