@@ -61,20 +61,20 @@ class App extends React.Component {
     let circle = wrapperDiv.append('circle')
       .attr('fill', 'white')
       .attr('stroke', 'black')
-      .attr('r', function(d) { return 50; })
+      .attr('r', function(d) { return 55; })
       .on('mouseover', function() {
-         d3.select(this).style('fill', 'steelblue');
+         d3.select(this).style('fill', '#347CED');
       }).on('mouseout', function() {
          d3.select(this).style('fill', 'white');
       })
 
     // appends text to g html tag
     wrapperDiv.append('text')
-      .attr('dx', function(d) { return -40; })
+      .attr('dx', function(d) { return -35; })
       .text(function(d) { 
         // if length of branchID string is greater than 12 characters, slice it
         if (d.length > 12) {
-          d = d.substr(0, 11) + '...'; 
+          d = d.substr(0, 10) + '...'; 
         }
         return d;
 
