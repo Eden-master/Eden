@@ -7,7 +7,7 @@ const user = require('./../../../config.js');
  * (we used 'db'), you can call sequelize functions on it (create, find, etc)
  */
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(`postgres://${user.userinfo}@localhost/${user.dbName}`);
+const sequelize = new Sequelize(`postgres://${user.userInfo}@localhost/${user.dbName}`);
 
 
 /* This authenticate function runs a simple query (1+1) on the database
