@@ -66,14 +66,15 @@ ul {
 }
 
 button{
+  border-radius: 3px;
   cursor: pointer;
   border: none;
   border: 1px solid #347CED;
   margin-left: 15px;
   margin-top: 15px;
   padding: 5px;
-  background-color: white;
-  color: black;
+  background-color: #347CED;
+  color: white;
   outline: none;
   font-size: 15px;
 }
@@ -85,6 +86,10 @@ button{
 #branchID {
   text-align: center;
   font-size: 2em;
+}
+
+.circleText {
+  cursor: pointer;
 }
 
 .hidden{
