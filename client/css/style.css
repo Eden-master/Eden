@@ -1,30 +1,56 @@
+@font-face {font-family: ProximaNova; src: url('fonts/ProximaNova-light.otf');}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: ProximaNova;
+  color: white;
+}
+
 h1 {
-	color:white;
+  margin: 0;
 }
 
+/*EDEN HEADER*/
+#header {
+  background-color: #347CED;
+  height: 10%;
+}
 
+#headerText {
+  padding-top: 15px;
+  text-align: center;
+}
+
+/*CHATBOX*/
 .container{
-	margin: auto;
-    width: 60%;
-    height: 70%;
-    border: 2px solid white;
-    border-radius: 25px;
-    padding: 25px;
-    background: rgba(25, 25, 25, .5);
+	margin: 3px auto;
+  width: 60%;
+  height: 70%;
+  border: 2px solid  #347CED;
+  border-radius: 2px;
+  color: black;
+  position: relative;
 }
 
-
-button{
-	border-radius: 5px;
-	background-color:white;
-	color:green;
-	opacity: 0.8;
+li {
+  cursor: pointer;
+  background-color: #FAFAFA;
+  font-size: 20px;
+  list-style-type: none;
+  padding: 10px 0;
+  margin: 3px 0;
+  width: 100%;
 }
 
-input{
-	opacity: 0.8;
-  display: block;
-  margin: 0 auto;
+input {
+  font-size: 20px;
+  outline: none;
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  bottom: 0;
+  border-top-color: #347CED;
 }
 
 ul {
@@ -33,13 +59,29 @@ ul {
   padding: 0;
 }
 
-li {
-  list-style-type: none;
-}
-
-.banner{
+#branchID{
 	text-align: center;
 	list-style-type: none;
+  padding-top: 15px;
+}
+
+button{
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  border: 1px solid #347CED;
+  margin-left: 15px;
+  margin-top: 15px;
+  padding: 5px;
+  background-color: #347CED;
+  color: white;
+  outline: none;
+  font-size: 15px;
+}
+
+#backButton {
+  position: absolute;
+  top: 10px;
 }
 
 #branchID {
@@ -47,12 +89,17 @@ li {
   font-size: 2em;
 }
 
-.chatform{
-	/*margin-top:60%;*/
+.circleText {
+  cursor: pointer;
 }
 
 .hidden{
 	width:10%;
+}
+
+#username {
+  border: 1px solid grey;
+  width: 35%;
 }
 
 .bar{
@@ -61,7 +108,6 @@ li {
 }
 
 body {
-	background: url(pic.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;

@@ -48,19 +48,46 @@ class App extends React.Component {
     let node = document.createElement('div');
 
     let svg = d3.select(node).append('svg')
-      .attr('width', 1000);
+      .attr('width', 2000).attr('height', 2000);
 
-    let circle = svg.selectAll("circle")
-      .data(arrayOfBranches, function(d) { return d; });
+    let dataForCircles = svg.selectAll('g')
+      .data(arrayOfBranches);
 
-    circle.enter().append("circle")
-      .style('fill', 'orange')
-      .attr("cy", 60)
-      .attr("cx", function(d, i) { return i * 100 + 30; })
-      .attr("r", function(d) { return 20; })
-      .on('mouseover', function() {
-         d3.select(this).style('fill', 'steelblue');
+    let wrapperDiv = dataForCircles.enter()
+      .append('g')
+      .attr('transform', function(d, i) {
+        return `translate(${i*130 + 300}, 80)`
       })
+
+    // appends circles to g html tag (binds together svg elements)
+    let circle = wrapperDiv.append('circle')
+      .attr('fill', 'white')
+      .attr('stroke', 'black')
+      .attr('r', function(d) { return 55; })
+      .attr('class', function(d) { return d.oldBranchID + " " + d.newBranchID; })
+      .on('mouseover', function(event) {
+         // d3.select(this).style('fill', '#347CED').attr("r", 65);
+         console.log(event.newBranchID);
+         d3.selectAll(`.${event.newBranchID}`).style('fill', 'orange').attr("r", 65);
+      }).on('mouseout', function(event) {
+         d3.selectAll(`.${event.newBranchID}`).style('fill', 'white').attr("r", 55);
+      })
+
+    // appends text to g html tag
+    wrapperDiv.append('text')
+      .attr('dx', function(d) { return -35; })
+      .attr('class', 'circleText')
+      .text(function(d) {
+        // if length of branchID string is greater than 12 characters, slice it
+        if (d.length > 12) {
+          d = d.newBranchID.substr(0, 10) + '...';
+        }
+        return d.newBranchID;
+
+      // GUI click listener that will guide user back to selected chat branch
+      }).on('click', function(event) {
+        this.setState({renderGUI: false, branchID: event.newBranchID});
+      }.bind(this));
     return node;
   }
 
@@ -100,7 +127,7 @@ class App extends React.Component {
 
     if (this.state.showGoogle && !signupChecker && signupChecker !== 1) {
       return (
-        <img onClick={this.handleGoogleRequest} src="http://3.bp.blogspot.com/-vRtr0HwWUxM/VXqTT_uO51I/AAAAAAAAfQU/9KQiFP_5rgw/s1600/Red-signin_Google_base_44dp.png"/>
+        <img onClick={this.handleGoogleRequest} src="https://developers.google.com/accounts/images/sign-in-with-google.png"/>
       );
     }
     return (

@@ -134,7 +134,7 @@ class ChatboxContainer extends React.Component {
     console.log('username', username);
     username = username[0] + ' ' + username[1];
     if (this.state.branchID !== 'main') {
-      arrow = <button onClick={this.handleBack}>Back</button>
+      arrow = <button id="backButton" onClick={this.handleBack}>Back</button>
     }
 
     return (
@@ -149,7 +149,6 @@ class ChatboxContainer extends React.Component {
           handleEnter={this.handleKeyPress}
           text={this.state.inputText}
           update={this.updateText} />
-        <button onClick={this.props.handleVisualizeClick}>Visualize</button>
       </div>
     );
   }
