@@ -43,6 +43,14 @@ class App extends React.Component {
   }
 
   makeCircles(arrayOfBranches) {
+    let drag = d3.behavior.drag().on('drag', dragmove);
+
+    function dragmove(d) {
+      let x = d3.event.x;
+      let y = d3.event.y;
+      d3.select(this).attr("transform", "translate(" + x + "," + y + ")")
+    }
+    
     let node = document.createElement('div');
 
     let svg = d3.select(node).append('svg')
@@ -54,8 +62,8 @@ class App extends React.Component {
     let wrapperDiv = dataForCircles.enter()
       .append('g')
       .attr('transform', function(d, i) {
-        return `translate(${i*130 + 300}, 80)`
-      })
+        return `translate(${i*130 + 400}, 80)`
+      }).call(drag);
 
     // appends circles to g html tag (binds together svg elements)
     let circle = wrapperDiv.append('circle')
@@ -64,12 +72,10 @@ class App extends React.Component {
       .attr('r', function(d) { return 55; })
       .attr('class', function(d) { return d.oldBranchID + " " + d.newBranchID; })
       .on('mouseover', function(event) {
-         // d3.select(this).style('fill', '#347CED').attr("r", 65);
-         console.log(event.newBranchID);
          d3.selectAll(`.${event.newBranchID}`).style('fill', 'orange').attr("r", 65);
       }).on('mouseout', function(event) {
          d3.selectAll(`.${event.newBranchID}`).style('fill', 'white').attr("r", 55);
-      })
+      }).on('click', drag)
 
     // appends text to g html tag
     wrapperDiv.append('text')
