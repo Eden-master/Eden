@@ -68,3 +68,7 @@ body {
   	background-size: cover;
   	color:white;
 }
+
+img:hover {
+  cursor: pointer;
+}

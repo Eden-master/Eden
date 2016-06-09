@@ -15,13 +15,15 @@ class App extends React.Component {
       branchID: 'main',
       listOfBranches: [],
       d3: '',
-      btnText: 'Open my mind'
+      btnText: 'Open my mind',
+      showGoogle: true
     }
 
     this.handleVisualizeClick = this.handleVisualizeClick.bind(this);
     this.handleGUIClick = this.handleGUIClick.bind(this);
     this.makeCircles = this.makeCircles.bind(this);
     this.showGUI = this.showGUI.bind(this);
+    this.handleGoogleRequest = this.handleGoogleRequest.bind(this);
   }
 
   handleVisualizeClick() {
@@ -84,7 +86,23 @@ class App extends React.Component {
     });
   }
 
+  handleGoogleRequest() {
+    request('/oauth2', (err, res, body) => {
+      if (err) throw new Error(err);
+
+      localStorage.setItem('signedIn', 1);
+      window.location.replace(body);
+    });
+  }
+
   render() {
+    let signupChecker = localStorage.getItem('signedIn');
+
+    if (this.state.showGoogle && !signupChecker && signupChecker !== 1) {
+      return (
+        <img onClick={this.handleGoogleRequest} src="http://3.bp.blogspot.com/-vRtr0HwWUxM/VXqTT_uO51I/AAAAAAAAfQU/9KQiFP_5rgw/s1600/Red-signin_Google_base_44dp.png"/>
+      );
+    }
     return (
       <div>
         {

@@ -5,6 +5,7 @@ function Chatbox(props) {
   return (
     <div>
       <div id="branchID">{props.branchID}</div>
+      <div>Welcome {props.username} to Eden. Say my name.</div>
       <Messages
         messages={props.messages}
         handleClick={props.handleClick}

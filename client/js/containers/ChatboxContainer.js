@@ -24,6 +24,7 @@ class ChatboxContainer extends React.Component {
     this.updateText = this.updateText.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleBack = this.handleBack.bind(this);
+    this.readCookie = this.readCookie.bind(this);
   }
 
   //gets messages from table that matches current branchID
@@ -46,8 +47,10 @@ class ChatboxContainer extends React.Component {
   //event handler for input box
   handleKeyPress(e) {
     if (e.keyCode === 13) {
+      const username = this.readCookie('username').split('%20').join('');
+
       let objToSend = JSON.stringify({
-        username: 'werollin',
+        username: username,
         message: this.state.inputText,
         branch_id: this.state.branchID
       });
@@ -69,9 +72,10 @@ class ChatboxContainer extends React.Component {
   handleClick(e) {
     //the message clicked from the chatbox
     const branchID = e.target.textContent;
+    const username = this.readCookie('username').split('%20').join('');
 
     let objToSend = JSON.stringify({
-      username: 'We made it dad',
+      username: username,
       newBranchID: e.target.textContent,
       oldBranchID: this.state.branchID
     });
@@ -112,9 +116,23 @@ class ChatboxContainer extends React.Component {
     }
   }
 
+  readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
   render() {
     //only renders back button if not in main branch
     let arrow;
+    var username = this.readCookie('username').split('%20');
+    console.log('username', username);
+    username = username[0] + ' ' + username[1];
     if (this.state.branchID !== 'main') {
       arrow = <button onClick={this.handleBack}>Back</button>
     }
@@ -123,6 +141,7 @@ class ChatboxContainer extends React.Component {
       <div>
         {arrow}
         <Chatbox
+          username={username}
           branchID={this.state.branchID}
           messages={this.state.messages}
           handleClick={this.handleClick} />

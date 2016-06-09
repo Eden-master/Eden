@@ -6,7 +6,6 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const  cookieParser = require('cookie-parser');
-// const data = require('./database/controller/dbController');
 const messageController = require('./messages/messageController');
 const authentication = require('./oauthTwo.js');
 const branchController = require('./branches/branchController')
