@@ -43,6 +43,7 @@ class App extends React.Component {
   }
 
   makeCircles(arrayOfBranches) {
+    console.log(arrayOfBranches)
     let node = document.createElement('div');
 
     let svg = d3.select(node).append('svg')
@@ -54,7 +55,7 @@ class App extends React.Component {
     let wrapperDiv = dataForCircles.enter()
       .append('g')
       .attr('transform', function(d, i) {
-        return `translate(${i*130 + 50}, 80)`
+        return `translate(${i*130 + 55}, 80)`
       })
 
     // appends circles to g html tag (binds together svg elements)
@@ -62,10 +63,12 @@ class App extends React.Component {
       .attr('fill', 'white')
       .attr('stroke', 'black')
       .attr('r', function(d) { return 55; })
-      .on('mouseover', function() {
-         d3.select(this).style('fill', '#347CED');
+      .attr('class', function(d) { return d.pairNumber; })
+      .on('mouseover', function(event) {
+         // d3.select(this).style('fill', '#347CED').attr("r", 65);
+         d3.selectAll('#hello').style('fill', '#347CED').attr("r", 65);
       }).on('mouseout', function() {
-         d3.select(this).style('fill', 'white');
+         d3.select(this).style('fill', 'white').attr("r", 55);
       })
 
     // appends text to g html tag
@@ -74,13 +77,13 @@ class App extends React.Component {
       .text(function(d) { 
         // if length of branchID string is greater than 12 characters, slice it
         if (d.length > 12) {
-          d = d.substr(0, 10) + '...'; 
+          d = d.newBranchID.substr(0, 10) + '...'; 
         }
-        return d;
+        return d.newBranchID;
 
       // GUI click listener that will guide user back to selected chat branch
       }).on('click', function(event) {
-        this.setState({renderGUI: false, branchID: event});
+        this.setState({renderGUI: false, branchID: event.newBranchID});
       }.bind(this));
     return node;
   }

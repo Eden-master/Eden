@@ -24,15 +24,17 @@ module.exports = {
 
   // when we want an array list of all existing branches
   getAllTheBranches: function(request, response) {
-    console.log('where we should be');
     Branch.sync().then(function() {
       Branch.findAll({
         attr: ["newBranchID"],
       }).then(function(results) {
         // results are an array of objects with info about the branchID, its parents, etc.
         response.send(
-          results.map(function(branchInfo) {
-            return branchInfo.newBranchID;
+          results.map(function(branchInfo, index) {
+            return {newBranchID: branchInfo.newBranchID, 
+              oldBranchID: branchInfo.oldBranchID,
+              pairNumber: index.toString(),
+            };
           })
         )
       })
@@ -42,6 +44,20 @@ module.exports = {
   // when we click on a message and want to create a new chat branch
 	createBranch: function(request, response, next) {
 		Branch.sync().then(function() {
+      Branch.findAll({
+        where: {
+          newBranchID: 'main',
+        }
+      }).then(function (results) {
+        if (results.length === 0) {
+          Branch.create({
+            newBranchID: 'main',
+            oldBranchID: 'none',
+            username: 'none',
+          })
+        }
+      })
+
       Branch.findAll({
         where: {
           newBranchID: request.body.newBranchID,
