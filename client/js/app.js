@@ -64,7 +64,7 @@ class App extends React.Component {
     let wrapperDiv = dataForCircles.enter()
       .append('g')
       .attr('transform', function(d, i) {
-        return `translate(${i*130 + 330}, 80)`
+        return `translate(${i*130 + 250}, 80)`
       }).call(drag);
 
     // appends circles to g html tag (binds together svg elements)
