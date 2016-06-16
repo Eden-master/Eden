@@ -130,9 +130,9 @@ class ChatboxContainer extends React.Component {
   render() {
     //only renders back button if not in main branch
     let arrow;
-    var username = this.readCookie('username').split('%20');
-    console.log('username', username);
-    username = username[0] + ' ' + username[1];
+    // var username = this.readCookie('username').split('%20');
+    // console.log('username', username);
+    // username = username[0] + ' ' + username[1];
     if (this.state.branchID !== 'main') {
       arrow = <button id="backButton" onClick={this.handleBack}>Back</button>
     }
@@ -141,7 +141,7 @@ class ChatboxContainer extends React.Component {
       <div>
         {arrow}
         <Chatbox
-          username={username}
+          username="michael"
           branchID={this.state.branchID}
           messages={this.state.messages}
           handleClick={this.handleClick} />
